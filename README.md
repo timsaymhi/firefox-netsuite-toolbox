@@ -2,10 +2,10 @@
 A Firefox extentions that is a toolbox for NetSuite. 
 
 ## Installation
-Just [click here](https://addons.mozilla.org/firefox/addon/netsuite-toolbox/) and then click on "Add to Firefox" button.
+Download XPI file. Go to menu -> Addons and Themes -> Gear Icon -> Install Addon from File
 
 ## Features
-
+Addon has been updated to properly run Saved Search Export without erroring out.
 ### Current Record Load
 Record is loaded with N/currentRecord and storaged in window.recordLoaded.
 
