@@ -1,11 +1,11 @@
 {
   "manifest_version": 2,
-  "name": "NetSuite Toolbox",
+  "name": "Firefox NetSuite Toolbox",
   "version": "1.3",
-  "applications": {
-    "gecko": {
-      "id": "netsuitetoolbox@timsaymhi"
-    }
+  "browser_specific_settings": {
+	  "gecko": {
+		"id": "firefoxnetsuitetoolbox@timsaymhi"
+	  }
   },
   "content_scripts": [
     {
