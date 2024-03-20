@@ -57,10 +57,17 @@
                     message:'Search is not saved. Please save search to export.'
                 })
 
-                const currentSearch = search.load({
-                    type: currentRecord.getValue('searchtype'),
-                    id: currentRecord.id
-                })
+                try {
+					const currentSearch = search.load({
+						type: currentRecord.getValue('scriptid')
+					})
+				}
+				catch(e) {
+					const currentSearch = search.load({
+						type: currentRecord.getValue('searchtype'),
+						id: currentRecord.id
+					})
+				}
 
                 dialog.alert({
                     title: 'Search exported',
