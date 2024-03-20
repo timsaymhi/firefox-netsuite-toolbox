@@ -1,1 +1,1 @@
-console.log('That\'s work!')
+console.log('Toolbox loaded.')
