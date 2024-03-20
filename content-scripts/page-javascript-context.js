@@ -48,7 +48,7 @@
     }
 
     function nstbExportSearch () {
-        require(['N/search', 'N/currentRecord', 'N/ui/dialog'], (search, cr, dialog) => {
+        require(['N/search', 'N/ui/dialog'], (search, dialog) => {
             try {
                 const currentRecord  = cr.get()
 
@@ -59,13 +59,13 @@
 
                 try {
 					const currentSearch = search.load({
-						type: currentRecord.getValue('scriptid')
+						type: nlapiGetFieldValue('scriptid')
 					})
 				}
 				catch(e) {
 					const currentSearch = search.load({
-						type: currentRecord.getValue('searchtype'),
-						id: currentRecord.id
+						type: nlapiGetFieldValue('searchtype'),
+						id: nlapiGetRecordId()
 					})
 				}
 
