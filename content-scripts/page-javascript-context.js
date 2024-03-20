@@ -51,16 +51,16 @@
         require(['N/search', 'N/ui/dialog'], (search, dialog) => {
             try {
                 var currentSearch = '';
-				const recId  = nlapiGetRecordId();
+				const recId  = window.nlapiGetRecordId();
 
                 if (!recId) dialog.alert({
                     title: 'NetSuite Toolbox',
                     message:'Search is not saved. Please save search to export.'
                 })
-				if (nlapiGetFieldValue('rectype') == -1) {
+				if (window.nlapiGetFieldValue('rectype') == -1) {
 					currentSearch = search.load({
-						type: nlapiGetFieldValue('searchtype'),
-						id: nlapiGetFieldValue('scriptid')
+						type: window.nlapiGetFieldValue('searchtype'),
+						id: window.nlapiGetFieldValue('scriptid')
 					});
 				}
 				else {
