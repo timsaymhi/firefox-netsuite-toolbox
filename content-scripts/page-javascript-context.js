@@ -50,25 +50,24 @@
     function nstbExportSearch () {
         require(['N/search', 'N/ui/dialog'], (search, dialog) => {
             try {
-                const currentRecord  = cr.get()
+                var currentSearch = '';
+				const recId  = nlapiGetRecordId();
 
-                if (!currentRecord.id) dialog.alert({
+                if (!recId) dialog.alert({
                     title: 'NetSuite Toolbox',
                     message:'Search is not saved. Please save search to export.'
                 })
-
-                try {
-					const currentSearch = search.load({
-						type: nlapiGetFieldValue('scriptid')
-					})
-				}
-				catch(e) {
-					const currentSearch = search.load({
+				if (nlapiGetFieldValue('rectype') == -1) {
+					currentSearch = search.load({
 						type: nlapiGetFieldValue('searchtype'),
-						id: nlapiGetRecordId()
-					})
+						id: nlapiGetFieldValue('scriptid')
+					});
 				}
-
+				else {
+					currentSearch = search.load({
+						id: nlapiGetFieldValue('scriptid')
+					});
+				}
                 dialog.alert({
                     title: 'Search exported',
                     message: '<textarea style="font-family: monospace; font-size=12px;" \
