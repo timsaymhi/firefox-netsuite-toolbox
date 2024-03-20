@@ -48,51 +48,26 @@
     }
 
     function nstbExportSearch () {
-        require(['N/search', 'N/ui/dialog'], (search, dialog) => {
-            try {
-                var currentSearch = '';
-				const recId  = window.nlapiGetRecordId();
-
-                if (!recId) dialog.alert({
-                    title: 'NetSuite Toolbox',
-                    message:'Search is not saved. Please save search to export.'
-                })
-				if (window.nlapiGetFieldValue('rectype') == -1) {
-					currentSearch = search.load({
-						type: window.nlapiGetFieldValue('searchtype'),
-						id: window.nlapiGetFieldValue('scriptid')
-					});
+        var currentSearch = '';
+		const recId  = nlapiGetRecordId();
+        if (!recId) {
+			alert('Search is not saved. Please save search to export.');
+		}
+		else {
+			try {
+				if (nlapiGetFieldValue('rectype') == -1) {
+					currentSearch = nlapiLoadSearch(nlapiGetFieldValue('searchtype'), recId);
 				}
 				else {
-					currentSearch = search.load({
-						id: nlapiGetFieldValue('scriptid')
-					});
+					currentSearch = nlapiLoadSearch(null,recId);
 				}
-                dialog.alert({
-                    title: 'Search exported',
-                    message: '<textarea style="font-family: monospace; font-size=12px;" \
-                          autofocus \
-                          readonly \
-                          rows="18" \
-                          cols="40" \
-                          autocomplete="off" \
-                          autocorrect="off" \
-                          autocapitalize="off" \
-                          spellcheck="false">' +
-                        JSON.stringify(currentSearch, null, 2) +
-                        '</textarea>\
-                        <br/><br/>\
-                        <a href="data:application/json;charset=utf-8,' +
-                        encodeURIComponent(JSON.stringify(currentSearch)) +
-                        '" target="_blank"> Open in new tab </a>'
-                })
-            } catch (e) {
-                dialog.alert({
-                    title: 'Error',
-                    message: e.message
-                })
-            }
-        })
+				window.open('data:application/json,'
+				+encodeURIComponent(JSON.stringify(currentSearch)),
+				'_blank')
+			} catch (e) {
+				alert(e.message);
+			}
+		}
     }
 
     function nstbExportRecord () {
